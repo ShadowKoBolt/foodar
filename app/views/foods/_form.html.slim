@@ -1,0 +1,17 @@
+= form_for @food do |f|
+  = render 'layouts/errors', f: f
+  = f.hidden_field :recipe_id
+  .form-group
+    = f.label :name
+    = f.text_field :name, class: 'form-control'
+  .form-group
+    = f.label :unit_name do
+      = Food.human_attribute_name(:unit_name)
+      small< e.g. grams, litres, whole
+    = f.text_field :unit_name, class: 'form-control'
+  .form-group
+    = f.label :aisle
+    = f.select :aisle, Food.aisle_options.map{ |o| [o.humanize, o] }, {}, class: 'form-control select2'
+  .actions
+    = f.submit class: 'btn btn-success'
+    = link_to 'Back', foods_path, class: 'btn btn-danger pull-right'

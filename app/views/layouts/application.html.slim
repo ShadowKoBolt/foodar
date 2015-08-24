@@ -1,0 +1,16 @@
+doctype html
+html
+  head
+    title
+      | Foodar
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  body
+    = render 'layouts/nav'
+    .row
+      .col-xs-12 &nbsp;
+    .container
+      - if notice
+        .alert.alert-success = notice
+      = yield

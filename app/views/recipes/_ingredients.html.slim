@@ -1,0 +1,26 @@
+.row.well
+  .col-xs-12
+    h3 = Ingredient.model_name.human.pluralize
+
+    table.table.table-striped
+      thead
+        tr
+          th = Ingredient.human_attribute_name(:name)
+          th = Ingredient.human_attribute_name(:amount)
+          th = Ingredient.human_attribute_name(:amount_per_serving)
+          th = Ingredient.human_attribute_name(:unit_name)
+          th
+
+      tbody
+        - @recipe.ingredients.each do |ingredient|
+          tr
+            td = ingredient.food.name
+            td = trim ingredient.amount
+            td = trim ingredient.amount_per_serving
+            td = ingredient.food.unit_name
+            td align='right'
+              .btn-group
+                = link_to t('link.edit'), edit_recipe_ingredient_path(@recipe, ingredient), class: 'btn btn-warning'
+                = link_to t('link.destroy'), [@recipe, ingredient], data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'btn btn-danger'
+
+    = link_to "Add #{Ingredient.model_name.human}", new_recipe_ingredient_path(@recipe), class: 'btn btn-success'

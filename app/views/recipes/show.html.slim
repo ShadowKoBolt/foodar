@@ -1,0 +1,13 @@
+h1
+  = @recipe.name
+  small Serves #{@recipe.serves}
+
+= render 'ingredients'
+
+.row
+  .col-xs-12 &nbsp;
+
+.btn-group
+  = link_to 'Edit', edit_recipe_path(@recipe), class: 'btn btn-warning'
+  = link_to 'Back', recipes_path, class: 'btn btn-default'
+

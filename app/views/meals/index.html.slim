@@ -1,0 +1,26 @@
+h1 = Meal.model_name.human
+
+table.table.table-stripped
+  thead
+    tr
+      th = Recipe.model_name.human
+      th = Meal.human_attribute_name(:date)
+      th = Meal.human_attribute_name(:time)
+      th = Meal.human_attribute_name(:serves)
+      th
+
+  tbody
+    - @meals.each do |meal|
+      tr
+        td = meal.recipe.name
+        td = l meal.date
+        td = meal.time.humanize
+        td = meal.serves
+        td align='right'
+          .btn-group
+            = link_to 'Edit', edit_meal_path(meal), class: 'btn btn-warning'
+            = link_to 'Destroy', meal, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'btn btn-danger'
+
+br
+
+= link_to 'New Meal', new_meal_path, class: 'btn btn-success'

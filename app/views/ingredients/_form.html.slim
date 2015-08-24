@@ -1,0 +1,18 @@
+= form_for [@recipe, @ingredient] do |f|
+  = render 'layouts/errors', f: f
+  .form-group
+    = f.label :food_id
+    .row
+      .col-sm-10
+        = f.collection_select :food_id, current_user.foods, :id, :name_unit, {}, class: 'form-control select2'
+      .col-sm-2
+        = link_to new_food_path(food: { recipe_id: @recipe.id }), class: 'btn btn-success pull-right' do
+          = t('link.new', model: Food.model_name.human)
+  .form-group
+    = f.label :amount do
+      = Ingredient.human_attribute_name(:amount)
+      small How much of this food is used in this recipe?
+    = f.text_field :amount, class: 'form-control', required: true
+  .actions
+    = f.submit class: 'btn btn-success'
+    = link_to 'Back', @recipe, class: 'btn btn-danger pull-right'

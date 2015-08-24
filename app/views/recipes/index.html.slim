@@ -1,0 +1,21 @@
+h1 = Recipe.model_name.human.pluralize
+
+table.table.table-striped
+  thead
+    tr
+      th = Recipe.human_attribute_name(:name)
+      th = Recipe.human_attribute_name(:serves)
+      th
+
+  tbody
+    - @recipes.each do |recipe|
+      tr
+        td = recipe.name
+        td = recipe.serves
+        td align='right'
+          .btn-group
+            = link_to t('link.view'), recipe, class: 'btn btn-success'
+            = link_to t('link.edit'), edit_recipe_path(recipe), class: 'btn btn-warning'
+            = link_to t('link.destroy'), recipe, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'btn btn-danger'
+
+= link_to 'New Recipe', new_recipe_path, class: 'btn btn-success'

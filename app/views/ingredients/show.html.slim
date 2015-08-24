@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong Recipe:
+  = @ingredient.recipe_id
+p
+  strong Food:
+  = @ingredient.food_id
+p
+  strong Amount:
+  = @ingredient.amount
+
+= link_to 'Edit', edit_ingredient_path(@ingredient)
+'|
+= link_to 'Back', ingredients_path

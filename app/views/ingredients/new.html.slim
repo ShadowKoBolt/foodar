@@ -1,0 +1,6 @@
+h1 
+  = t('title.new', model: Ingredient.model_name.human)
+  small = @recipe.name
+
+== render 'form'
+
