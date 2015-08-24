@@ -1,3 +1,5 @@
+ruby "2.2.2"
+
 source 'https://rubygems.org'
 
 
@@ -57,3 +59,7 @@ gem 'fullcalendar-rails'
 gem 'momentjs-rails'
 gem 'bootstrap3-datetimepicker-rails'
 gem 'select2-rails'
+
+group :production do
+  gem 'rails_12factor'
+end
