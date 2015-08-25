@@ -1,0 +1,20 @@
+h1 = t('title.duplicate', model: Meal.model_name.human.pluralize)
+
+= form_tag execute_duplicate_meals_url do
+  .form-group.date-container
+    = label_tag :start_date
+    = text_field_tag :start_date, \
+      @start_date.strftime('%d-%m-%Y'), \
+      class: 'form-control date-select'
+  .form-group.date-container
+    = label_tag :end_date
+    = text_field_tag :end_date, \
+      @end_date.strftime('%d-%m-%Y'), \
+      class: 'form-control date-select'
+  .form-group.date-container
+    = label_tag :target_date
+    = text_field_tag :target_date, \
+      @target_date.strftime('%d-%m-%Y'), \
+      class: 'form-control date-select'
+  .actions
+    = submit_tag t('action.duplicate'), class: 'btn btn-success'

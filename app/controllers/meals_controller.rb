@@ -56,6 +56,29 @@ class MealsController < ApplicationController
     end
   end
 
+  def duplicate
+    @start_date = Date.commercial(Date.today.year, Date.today.cweek-1, 1)
+    @end_date = Date.commercial(Date.today.year, Date.today.cweek-1, 7)
+    @target_date = Date.commercial(Date.today.year, Date.today.cweek, 1)
+  end
+
+  def execute_duplicate
+    start_date = Date.parse(params[:start_date])
+    end_date = Date.parse(params[:end_date])
+    target_date = Date.parse(params[:target_date])
+    meals = current_user
+      .meals
+      .where(["date >= ? AND date <= ?", start_date, end_date])
+    ActiveRecord::Base.transaction do
+      meals.each do |meal|
+        offset = meal.date - start_date
+        meal.dup.tap{ |m| m.date = (target_date + offset.days) }.save!
+      end
+    end
+    redirect_to root_url,
+      notice: t('notice.duplicated', model: Meal.model_name.human.pluralize)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_meal

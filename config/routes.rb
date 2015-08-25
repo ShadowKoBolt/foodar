@@ -8,7 +8,12 @@ Rails.application.routes.draw do
     resources :ingredients, only: [:create, :new, :edit, :update, :destroy]
   end
   resources :foods, except: [:show]
-  resources :meals, except: [:show]
+  resources :meals, except: [:show] do
+    collection do
+      get :duplicate
+      post :execute_duplicate
+    end
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

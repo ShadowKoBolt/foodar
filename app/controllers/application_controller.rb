@@ -19,4 +19,5 @@ class ApplicationController < ActionController::Base
       color: Meal.time_colour(meal.time)
     } }.to_json
   end
+
 end

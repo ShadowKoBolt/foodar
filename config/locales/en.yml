@@ -25,17 +25,23 @@ en:
   title:
     edit: "Editing %{model}"
     new: "New %{model}"
+    duplicate: "Duplicate %{model}"
 
   link:
     edit: "Edit"
     destroy: "Destroy"
     new: "New %{model}"
     view: "View"
+    duplicate: "Duplicate %{model}"
 
   notice:
     created: "%{model} was successfully created"
+    duplicated: "%{model} successfully duplicated"
 
   confirm: "Are you sure?"
+
+  action:
+    duplicate: "Duplicate"
 
   date:
     formats:

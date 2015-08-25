@@ -16,4 +16,7 @@
     = f.text_field :serves, class: 'form-control'
   .actions 
     = f.submit class: 'btn btn-success'
-    = link_to 'Back', meals_path, class: 'btn btn-danger pull-right'
+    .pull-right
+      = link_to t('link.destroy'), @meal, data: {:confirm => t('confirm')}, :method => :delete, class: 'btn btn-danger'
+      | &nbsp;
+      = link_to 'Back', meals_path, class: 'btn btn-warning pull-right'
