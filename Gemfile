@@ -63,3 +63,7 @@ gem 'select2-rails'
 group :production do
   gem 'rails_12factor'
 end
+
+group :development do
+  gem 'bullet'
+end
