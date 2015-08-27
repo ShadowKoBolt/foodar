@@ -6,6 +6,8 @@ class Meal < ActiveRecord::Base
   belongs_to :recipe
   belongs_to :user
 
+  default_scope { order(date: :desc) }
+
   def self.time_options
     %w( breakfast lunch dinner snack )
   end

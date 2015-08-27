@@ -5,4 +5,6 @@ class Recipe < ActiveRecord::Base
 
   validates :name, presence: true, uniqueness: { scope: :user_id }
   validates :serves, numericality: { only_integer: true, min: 1, max: 100 }
+
+  default_scope { order(:name) }
 end
