@@ -5,6 +5,7 @@ table.table.table-striped
     tr
       th = Food.human_attribute_name(:name)
       th = Food.human_attribute_name(:unit_name)
+      th = Recipe.model_name.human.pluralize
       th
 
   tbody
@@ -12,6 +13,7 @@ table.table.table-striped
       tr
         td = food.name
         td = food.unit_name
+        td = food.recipes.collect(&:name).to_sentence
         td align='right'
           .btn-group
             = link_to t('link.edit'), edit_food_path(food), class: 'btn btn-warning'

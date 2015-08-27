@@ -2,3 +2,11 @@ h1 = t('title.edit', model: Food.model_name.human)
 
 == render 'form'
 
+.row
+  .col-xs-12 &nbsp;
+
+- if @food.recipes.any?
+  .list-group
+    .list-group-item Used in the following recipes:
+    - @food.recipes.each do |recipe|
+      = link_to recipe.name, recipe_path(recipe), class: 'list-group-item'
