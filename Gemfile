@@ -59,6 +59,7 @@ gem 'fullcalendar-rails'
 gem 'momentjs-rails'
 gem 'bootstrap3-datetimepicker-rails'
 gem 'select2-rails'
+gem 'jquery-ui-rails'
 
 group :production do
   gem 'rails_12factor'

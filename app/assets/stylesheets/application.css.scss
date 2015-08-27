@@ -22,6 +22,7 @@
 @import 'bootstrap-datetimepicker';
 @import 'select2';
 @import 'select2-bootstrap';
+@import 'jquery-ui';
 
 .date-container {
   position: relative;
@@ -38,4 +39,9 @@ h1 small {
   &.lunch { background-color: darken($brand-primary, 10%); }
   &.dinner { background-color: darken($brand-primary, 20%); }
   &.snack { background-color: darken($brand-primary, 30%); }
+}
+.fc-toolbar {
+  h2 {
+    font-size: 26px;
+  }
 }

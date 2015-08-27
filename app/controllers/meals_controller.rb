@@ -12,7 +12,6 @@ class MealsController < ApplicationController
       url: edit_meal_url(meal),
       className: meal.time
     } }.to_json
-    @upcoming_meals = @meals.select{ |meal| meal.date >= Date.today }
   end
 
   # GET /meals/new

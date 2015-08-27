@@ -21,6 +21,7 @@
 //= require select2
 //= require react
 //= require react_ujs
+//= require jquery-ui
 //= require components
 //= require_self
 
@@ -28,11 +29,23 @@ $(document).on('page:change', function() {
   $('#calendar').each(function() {
     element = $(this);
     element.fullCalendar({
-      events: element.data('events'),
-      dayClick: function(date) {
-        dateString = date.format('DD-MM-YYYY');
-        window.location.href = element.data('new-meal-url').replace('DATE_PLACEHOLDER', dateString)
-      }
+      droppable: true,
+      drop: function(date) {
+        recipeElement = $(this);
+        $('#meal_recipe_id').val(recipeElement.data('id'));
+        $('#meal_date').val(date.format());
+        $('#meal_serves').val(recipeElement.data('serves'));
+        $('#meal-form-modal').modal('show');
+      },
+      events: element.data('events')
+    });
+  });
+
+  $('.calendar-droppable').each(function() {
+    element = $(this);
+    element.draggable({
+      revert: true,
+      revertDuration: 0
     });
   });
 
