@@ -8,21 +8,10 @@ class Meal < ActiveRecord::Base
 
   default_scope { order(date: :desc) }
 
-  def self.time_options
-    %w( breakfast lunch dinner snack )
-  end
+  TIMES = %w( breakfast lunch dinner snack )
 
-  def self.time_colour(time)
-    case time
-    when 'breakfast'
-      'green'
-    when 'lunch'
-      'blue'
-    when 'dinner'
-      'red'
-    when 'snack'
-      'yellow'
-    end
+  def time_position
+    TIMES.rindex(time)
   end
 
 end

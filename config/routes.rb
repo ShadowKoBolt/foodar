@@ -1,12 +1,12 @@
 Rails.application.routes.draw do
-  resources :lists
   devise_for :users
 
-  root 'application#dashboard'
+  root 'meals#index'
 
   resources :recipes do
     resources :ingredients, only: [:create, :new, :edit, :update, :destroy]
   end
+  resources :lists
   resources :foods, except: [:show]
   resources :meals, except: [:show] do
     collection do

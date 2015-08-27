@@ -4,7 +4,15 @@ class MealsController < ApplicationController
   # GET /meals
   # GET /meals.json
   def index
-    @meals = Meal.all
+    @meals = current_user.meals.includes(:recipe)
+    @meals_json = @meals
+      .collect{ |meal| {
+      title: meal.recipe.name,
+      start: meal.date.strftime("%Y-%m-%d"),
+      url: edit_meal_url(meal),
+      className: meal.time
+    } }.to_json
+    @upcoming_meals = @meals.select{ |meal| meal.date >= Date.today }
   end
 
   # GET /meals/new
@@ -82,7 +90,7 @@ class MealsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_meal
-      @meal = Meal.find(params[:id])
+      @meal = current_user.meals.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

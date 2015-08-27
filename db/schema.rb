@@ -45,11 +45,11 @@ ActiveRecord::Schema.define(version: 20150823075804) do
   create_table "meals", force: :cascade do |t|
     t.integer  "recipe_id"
     t.date     "date"
-    t.string   "time"
     t.float    "serves"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.string   "time",       default: "", null: false
   end
 
   create_table "recipes", force: :cascade do |t|

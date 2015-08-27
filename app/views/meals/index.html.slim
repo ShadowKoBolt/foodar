@@ -1,5 +1,21 @@
 h1 = Meal.model_name.human
 
+.row
+  .col-sm-8
+    #calendar data-events=@meals_json data-new-meal-url=new_meal_url(date: 'DATE_PLACEHOLDER')
+  .col-sm-4.well
+    h3 Upcoming #{Meal.model_name.human.pluralize}
+    ul.list-unstyled
+      - @upcoming_meals.group_by(&:date).to_a.reverse.each do |date, meals|
+        li
+          = l date
+          ul
+            - meals.sort_by(&:time_position).each do |meal|
+              li #{meal.time.humanize} - #{meal.recipe.name} (serves #{trim meal.serves})
+
+.row
+  .col-xs-12 &nbsp;
+
 table.table.table-stripped
   thead
     tr
@@ -20,8 +36,6 @@ table.table.table-stripped
           .btn-group
             = link_to 'Edit', edit_meal_path(meal), class: 'btn btn-warning'
             = link_to 'Destroy', meal, data: {:confirm => t('confirm')}, :method => :delete, class: 'btn btn-danger'
-
-br
 
 .btn-group
   = link_to t('link.new', model: Meal.model_name.human), new_meal_path, class: 'btn btn-success'

@@ -5,7 +5,7 @@
     = f.text_field :date, class: 'form-control date-select', value: f.object.date.try(:strftime, '%d-%m-%Y')
   .form-group
     = f.label :time
-    = f.select :time, Meal.time_options.map{ |m| [m.humanize, m] }, {}, class: 'form-control'
+    = f.select :time, Meal::TIMES.map{ |m| [m.humanize, m] }, {}, class: 'form-control'
   .form-group
     = f.label :recipe_id
     = f.collection_select :recipe_id, current_user.recipes, :id, :name, {}, class: 'form-control select2'
