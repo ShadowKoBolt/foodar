@@ -2,8 +2,6 @@ class MealsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_meal, only: [:edit, :update, :destroy]
 
-  # GET /meals
-  # GET /meals.json
   def index
     @meals = current_user.meals.includes(:recipe)
     @meals_json = @meals.
@@ -18,17 +16,13 @@ class MealsController < ApplicationController
       }.to_json
   end
 
-  # GET /meals/new
   def new
     @meal = Meal.new(date: params[:date])
   end
 
-  # GET /meals/1/edit
   def edit
   end
 
-  # POST /meals
-  # POST /meals.json
   def create
     @meal = Meal.new(meal_params)
 
@@ -43,8 +37,6 @@ class MealsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /meals/1
-  # PATCH/PUT /meals/1.json
   def update
     respond_to do |format|
       if @meal.update(meal_params)
@@ -57,8 +49,6 @@ class MealsController < ApplicationController
     end
   end
 
-  # DELETE /meals/1
-  # DELETE /meals/1.json
   def destroy
     @meal.destroy
     respond_to do |format|
