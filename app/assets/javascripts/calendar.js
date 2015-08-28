@@ -1,9 +1,9 @@
 $(document).on('page:change', function() {
   $('#calendar').each(function() {
-    element = $(this);
+    var element = $(this);
     element.fullCalendar({
       drop: function(date) {
-        recipeElement = $(this);
+        var recipeElement = $(this);
         $('#meal_recipe_id').val(recipeElement.data('id'));
         $('#meal_date').val(date.format());
         $('#meal_serves').val(recipeElement.data('serves'));
@@ -22,7 +22,7 @@ $(document).on('page:change', function() {
   });
 
   $('.calendar-droppable').each(function() {
-    element = $(this);
+    var element = $(this);
     element.draggable({
       revert: true,
       revertDuration: 0

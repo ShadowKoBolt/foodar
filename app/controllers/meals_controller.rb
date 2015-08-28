@@ -6,13 +6,13 @@ class MealsController < ApplicationController
   # GET /meals.json
   def index
     @meals = current_user.meals.includes(:recipe)
-    @meals_json = @meals
-      .sort_by(&:time_position)
-      .collect{ |meal| {
-      title: "(#{meal.time.humanize[0]}) #{meal.recipe.name}",
-      start: meal.date.strftime("%Y-%m-%d"),
-      url: edit_meal_url(meal),
-      className: meal.time
+    @meals_json = @meals.
+      sort_by(&:time_position).
+      collect{ |meal| {
+        title: "(#{meal.time.humanize[0]}) #{meal.recipe.name}",
+        start: meal.date.strftime("%Y-%m-%d"),
+        url: edit_meal_url(meal),
+        className: meal.time
     } }.to_json
   end
 
