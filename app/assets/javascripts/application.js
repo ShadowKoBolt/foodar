@@ -23,32 +23,10 @@
 //= require react_ujs
 //= require jquery-ui
 //= require components
+//= require calendar
 //= require_self
 
 $(document).on('page:change', function() {
-  $('#calendar').each(function() {
-    element = $(this);
-    element.fullCalendar({
-      droppable: true,
-      drop: function(date) {
-        recipeElement = $(this);
-        $('#meal_recipe_id').val(recipeElement.data('id'));
-        $('#meal_date').val(date.format());
-        $('#meal_serves').val(recipeElement.data('serves'));
-        $('#meal-form-modal').modal('show');
-      },
-      events: element.data('events')
-    });
-  });
-
-  $('.calendar-droppable').each(function() {
-    element = $(this);
-    element.draggable({
-      revert: true,
-      revertDuration: 0
-    });
-  });
-
   $('.date-select').datetimepicker({
      format: 'DD-MM-YYYY',
      showClose: true

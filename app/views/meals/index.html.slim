@@ -39,3 +39,4 @@ table.table.table-stripped
   .col-xs-12 &nbsp;
 
 = react_component 'MealModalForm', title: t('title.new', model: Meal.model_name.human), action: meals_path, auth_token: form_authenticity_token
+= react_component 'DuplicateModalForm', title: t('title.duplicate', model: Meal.model_name.human), action: execute_duplicate_meals_path, auth_token: form_authenticity_token

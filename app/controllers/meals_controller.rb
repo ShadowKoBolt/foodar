@@ -2,30 +2,27 @@ class MealsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_meal, only: [:edit, :update, :destroy]
 
-  # GET /meals
-  # GET /meals.json
   def index
     @meals = current_user.meals.includes(:recipe)
-    @meals_json = @meals
-      .collect{ |meal| {
-      title: meal.recipe.name,
-      start: meal.date.strftime("%Y-%m-%d"),
-      url: edit_meal_url(meal),
-      className: meal.time
-    } }.to_json
+    @meals_json = @meals.
+      sort_by(&:time_position).
+      map do |meal|
+        {
+          title: "(#{meal.time.humanize[0]}) #{meal.recipe.name}",
+          start: meal.date.strftime("%Y-%m-%d"),
+          url: edit_meal_url(meal),
+          className: meal.time
+        }
+      end.to_json
   end
 
-  # GET /meals/new
   def new
     @meal = Meal.new(date: params[:date])
   end
 
-  # GET /meals/1/edit
   def edit
   end
 
-  # POST /meals
-  # POST /meals.json
   def create
     @meal = Meal.new(meal_params)
 
@@ -40,8 +37,6 @@ class MealsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /meals/1
-  # PATCH/PUT /meals/1.json
   def update
     respond_to do |format|
       if @meal.update(meal_params)
@@ -54,8 +49,6 @@ class MealsController < ApplicationController
     end
   end
 
-  # DELETE /meals/1
-  # DELETE /meals/1.json
   def destroy
     @meal.destroy
     respond_to do |format|
@@ -74,6 +67,7 @@ class MealsController < ApplicationController
     start_date = Date.parse(params[:start_date])
     end_date = Date.parse(params[:end_date])
     target_date = Date.parse(params[:target_date])
+    # TODO validation
     meals = current_user
       .meals
       .where(["date >= ? AND date <= ?", start_date, end_date])
@@ -83,7 +77,7 @@ class MealsController < ApplicationController
         meal.dup.tap{ |m| m.date = (target_date + offset.days) }.save!
       end
     end
-    redirect_to root_url,
+    redirect_to meals_url,
       notice: t('notice.duplicated', model: Meal.model_name.human.pluralize)
   end
 
