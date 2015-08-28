@@ -24,7 +24,7 @@ RSpec.describe Food, type: :model do
     it "should be ordered by name" do
       z = FactoryGirl.create(:food, name: "Z")
       a = FactoryGirl.create(:food, name: "A")
-      expect(Food.all).to contain_exactly(a,z)
+      expect(Food.all).to contain_exactly(a, z)
     end
   end
 
