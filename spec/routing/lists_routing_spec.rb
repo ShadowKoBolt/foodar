@@ -2,7 +2,6 @@ require "rails_helper"
 
 RSpec.describe ListsController, type: :routing do
   describe "routing" do
-
     it "routes to #index" do
       expect(:get => "/lists").to route_to("lists#index")
     end
@@ -34,6 +33,5 @@ RSpec.describe ListsController, type: :routing do
     it "routes to #destroy" do
       expect(:delete => "/lists/1").to route_to("lists#destroy", :id => "1")
     end
-
   end
 end
