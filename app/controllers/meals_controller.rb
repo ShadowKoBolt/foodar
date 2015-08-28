@@ -7,8 +7,9 @@ class MealsController < ApplicationController
   def index
     @meals = current_user.meals.includes(:recipe)
     @meals_json = @meals
+      .sort_by(&:time_position)
       .collect{ |meal| {
-      title: meal.recipe.name,
+      title: "(#{meal.time.humanize[0]}) #{meal.recipe.name}",
       start: meal.date.strftime("%Y-%m-%d"),
       url: edit_meal_url(meal),
       className: meal.time
@@ -74,6 +75,7 @@ class MealsController < ApplicationController
     start_date = Date.parse(params[:start_date])
     end_date = Date.parse(params[:end_date])
     target_date = Date.parse(params[:target_date])
+    # TODO validation
     meals = current_user
       .meals
       .where(["date >= ? AND date <= ?", start_date, end_date])
@@ -83,7 +85,7 @@ class MealsController < ApplicationController
         meal.dup.tap{ |m| m.date = (target_date + offset.days) }.save!
       end
     end
-    redirect_to root_url,
+    redirect_to meals_url,
       notice: t('notice.duplicated', model: Meal.model_name.human.pluralize)
   end
 
