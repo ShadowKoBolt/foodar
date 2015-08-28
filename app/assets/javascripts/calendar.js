@@ -15,7 +15,7 @@ $(document).on('page:change', function() {
       select: function(start, end) {
         $('#duplicate_start_date').val(start.format());
         $('#duplicate_end_date').val(end.format());
-        $('#duplicate_target_date').val(moment().format("DD-MM-YYYY"));
+        $('#duplicate_target_date').val(moment().format('DD-MM-YYYY'));
         $('#duplicate-form-modal').modal('show');
       }
     });
