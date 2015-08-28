@@ -16,7 +16,7 @@ RSpec.describe Food, type: :model do
       expect(subject).to be_kind_of(Array)
     end
     it "should be made up of strings" do
-      expect(subject.map{ |item| item.class }.uniq).to eq([String])
+      expect(subject.map { |item| item.class }.uniq).to eq([String])
     end
   end
 

@@ -6,14 +6,14 @@ class MealsController < ApplicationController
     @meals = current_user.meals.includes(:recipe)
     @meals_json = @meals.
       sort_by(&:time_position).
-      map{ |meal|
+      map do |meal|
         {
           title: "(#{meal.time.humanize[0]}) #{meal.recipe.name}",
           start: meal.date.strftime("%Y-%m-%d"),
           url: edit_meal_url(meal),
           className: meal.time
         }
-      }.to_json
+      end.to_json
   end
 
   def new
