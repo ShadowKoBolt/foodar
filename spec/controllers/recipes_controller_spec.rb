@@ -94,13 +94,13 @@ RSpec.describe RecipesController, type: :controller do
     describe "GET #edit" do
       it "cannot find non user recipes" do
         recipe = FactoryGirl.create(:recipe)
-        expect { get :edit, { id: recipe.to_param } }.
+        expect { get :edit, id: recipe.to_param }.
           to raise_error(ActiveRecord::RecordNotFound)
       end
 
       it "assigns the requested recipe as @recipe" do
         recipe = FactoryGirl.create(:recipe, user: @current_user)
-        get :edit, { id: recipe.to_param }
+        get :edit, id: recipe.to_param
         expect(assigns(:recipe)).to eq(recipe)
       end
     end
@@ -109,31 +109,31 @@ RSpec.describe RecipesController, type: :controller do
       context "with valid params" do
         it "creates a new Recipe" do
           expect do
-            post :create, { recipe: valid_attributes }
+            post :create, recipe: valid_attributes
           end.to change(Recipe, :count).by(1)
         end
 
         it "assigns a newly created user recipe as @recipe" do
-          post :create, { recipe: valid_attributes }
+          post :create, recipe: valid_attributes
           expect(assigns(:recipe)).to be_a(Recipe)
           expect(assigns(:recipe)).to be_persisted
           expect(assigns(:recipe).user).to eq(@current_user)
         end
 
         it "redirects to the created recipe" do
-          post :create, { recipe: valid_attributes }
+          post :create, recipe: valid_attributes
           expect(response).to redirect_to(recipe_url(Recipe.last))
         end
       end
 
       context "with invalid params" do
         it "assigns a newly created but unsaved recipe as @recipe" do
-          post :create, { recipe: { recipe_id: nil } }
+          post :create, recipe: { recipe_id: nil }
           expect(assigns(:recipe)).to be_a_new(Recipe)
         end
 
         it "re-renders the 'new' template" do
-          post :create, { recipe: { recipe_id: nil } }
+          post :create, recipe: { recipe_id: nil }
           expect(response).to render_template("new")
         end
       end
@@ -145,25 +145,25 @@ RSpec.describe RecipesController, type: :controller do
 
         it "cannot find non user recipes" do
           recipe = FactoryGirl.create(:recipe)
-          expect { put :update, { id: recipe.to_param } }.
+          expect { put :update, id: recipe.to_param }.
             to raise_error(ActiveRecord::RecordNotFound)
         end
 
         it "updates the requested recipe" do
           recipe = FactoryGirl.create(:recipe, user: @current_user)
-          put :update, { id: recipe.to_param, recipe: new_attributes }
+          put :update, id: recipe.to_param, recipe: new_attributes
           expect(recipe.reload.serves).to eq(2)
         end
 
         it "assigns the requested recipe as @recipe" do
           recipe = FactoryGirl.create(:recipe, user: @current_user)
-          put :update, { id: recipe.to_param, recipe: new_attributes }
+          put :update, id: recipe.to_param, recipe: new_attributes
           expect(assigns(:recipe)).to eq(recipe)
         end
 
         it "redirects to the recipe" do
           recipe = FactoryGirl.create(:recipe, user: @current_user)
-          put :update, { id: recipe.to_param, recipe: valid_attributes }
+          put :update, id: recipe.to_param, recipe: valid_attributes
           expect(response).to redirect_to(recipe_url(recipe))
         end
       end
@@ -171,13 +171,13 @@ RSpec.describe RecipesController, type: :controller do
       context "with invalid params" do
         it "assigns the recipe as @recipe" do
           recipe = FactoryGirl.create(:recipe, user: @current_user)
-          put :update, { id: recipe.to_param, recipe: { serves: nil } }
+          put :update, id: recipe.to_param, recipe: { serves: nil }
           expect(assigns(:recipe)).to eq(recipe)
         end
 
         it "re-renders the 'edit' template" do
           recipe = FactoryGirl.create(:recipe, user: @current_user)
-          put :update, { id: recipe.to_param, recipe: { serves: nil } }
+          put :update, id: recipe.to_param, recipe: { serves: nil }
           expect(response).to render_template("edit")
         end
       end
@@ -186,20 +186,20 @@ RSpec.describe RecipesController, type: :controller do
     describe "DELETE #destroy" do
       it "cannot find non user recipes" do
         recipe = FactoryGirl.create(:recipe)
-        expect { delete :destroy, { id: recipe.to_param } }.
+        expect { delete :destroy, id: recipe.to_param }.
           to raise_error(ActiveRecord::RecordNotFound)
       end
 
       it "destroys the requested recipe" do
         recipe = FactoryGirl.create(:recipe, user: @current_user)
         expect do
-          delete :destroy, { id: recipe.to_param }
+          delete :destroy, id: recipe.to_param
         end.to change(Recipe, :count).by(-1)
       end
 
       it "redirects to the recipes list" do
         recipe = FactoryGirl.create(:recipe, user: @current_user)
-        delete :destroy, { id: recipe.to_param }
+        delete :destroy, id: recipe.to_param
         expect(response).to redirect_to(recipes_url)
       end
     end

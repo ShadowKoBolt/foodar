@@ -73,13 +73,13 @@ RSpec.describe MealsController, type: :controller do
     describe "GET #edit" do
       it "cannot find non user meals" do
         meal = FactoryGirl.create(:meal)
-        expect { get :edit, { id: meal.to_param } }.
+        expect { get :edit, id: meal.to_param }.
           to raise_error(ActiveRecord::RecordNotFound)
       end
 
       it "assigns the requested meal as @meal" do
         meal = FactoryGirl.create(:meal, user: @current_user)
-        get :edit, { id: meal.to_param }
+        get :edit, id: meal.to_param
         expect(assigns(:meal)).to eq(meal)
       end
     end
@@ -88,31 +88,31 @@ RSpec.describe MealsController, type: :controller do
       context "with valid params" do
         it "creates a new Meal" do
           expect do
-            post :create, { meal: valid_attributes }
+            post :create, meal: valid_attributes
           end.to change(Meal, :count).by(1)
         end
 
         it "assigns a newly created user meal as @meal" do
-          post :create, { meal: valid_attributes }
+          post :create, meal: valid_attributes
           expect(assigns(:meal)).to be_a(Meal)
           expect(assigns(:meal)).to be_persisted
           expect(assigns(:meal).user).to eq(@current_user)
         end
 
         it "redirects to the meals index" do
-          post :create, { meal: valid_attributes }
+          post :create, meal: valid_attributes
           expect(response).to redirect_to(meals_url)
         end
       end
 
       context "with invalid params" do
         it "assigns a newly created but unsaved meal as @meal" do
-          post :create, { meal: { recipe_id: nil } }
+          post :create, meal: { recipe_id: nil }
           expect(assigns(:meal)).to be_a_new(Meal)
         end
 
         it "re-renders the 'new' template" do
-          post :create, { meal: { recipe_id: nil } }
+          post :create, meal: { recipe_id: nil }
           expect(response).to render_template("new")
         end
       end
@@ -124,25 +124,25 @@ RSpec.describe MealsController, type: :controller do
 
         it "cannot find non user meals" do
           meal = FactoryGirl.create(:meal)
-          expect { put :update, { id: meal.to_param } }.
+          expect { put :update, id: meal.to_param }.
             to raise_error(ActiveRecord::RecordNotFound)
         end
 
         it "updates the requested meal" do
           meal = FactoryGirl.create(:meal, user: @current_user)
-          put :update, { id: meal.to_param, meal: new_attributes }
+          put :update, id: meal.to_param, meal: new_attributes
           expect(meal.reload.serves).to eq(2)
         end
 
         it "assigns the requested meal as @meal" do
           meal = FactoryGirl.create(:meal, user: @current_user)
-          put :update, { id: meal.to_param, meal: new_attributes }
+          put :update, id: meal.to_param, meal: new_attributes
           expect(assigns(:meal)).to eq(meal)
         end
 
         it "redirects to the meals index" do
           meal = FactoryGirl.create(:meal, user: @current_user)
-          put :update, { id: meal.to_param, meal: valid_attributes }
+          put :update, id: meal.to_param, meal: valid_attributes
           expect(response).to redirect_to(meals_url)
         end
       end
@@ -150,13 +150,13 @@ RSpec.describe MealsController, type: :controller do
       context "with invalid params" do
         it "assigns the meal as @meal" do
           meal = FactoryGirl.create(:meal, user: @current_user)
-          put :update, { id: meal.to_param, meal: { serves: nil } }
+          put :update, id: meal.to_param, meal: { serves: nil }
           expect(assigns(:meal)).to eq(meal)
         end
 
         it "re-renders the 'edit' template" do
           meal = FactoryGirl.create(:meal, user: @current_user)
-          put :update, { id: meal.to_param, meal: { serves: nil } }
+          put :update, id: meal.to_param, meal: { serves: nil }
           expect(response).to render_template("edit")
         end
       end
@@ -165,20 +165,20 @@ RSpec.describe MealsController, type: :controller do
     describe "DELETE #destroy" do
       it "cannot find non user meals" do
         meal = FactoryGirl.create(:meal)
-        expect { delete :destroy, { id: meal.to_param } }.
+        expect { delete :destroy, id: meal.to_param }.
           to raise_error(ActiveRecord::RecordNotFound)
       end
 
       it "destroys the requested meal" do
         meal = FactoryGirl.create(:meal, user: @current_user)
         expect do
-          delete :destroy, { id: meal.to_param }
+          delete :destroy, id: meal.to_param
         end.to change(Meal, :count).by(-1)
       end
 
       it "redirects to the meals list" do
         meal = FactoryGirl.create(:meal, user: @current_user)
-        delete :destroy, { id: meal.to_param }
+        delete :destroy, id: meal.to_param
         expect(response).to redirect_to(meals_url)
       end
     end

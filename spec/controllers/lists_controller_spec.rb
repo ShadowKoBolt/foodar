@@ -94,13 +94,13 @@ RSpec.describe ListsController, type: :controller do
     describe "GET #edit" do
       it "cannot find non user lists" do
         list = FactoryGirl.create(:list)
-        expect { get :edit, { id: list.to_param } }.
+        expect { get :edit, id: list.to_param }.
           to raise_error(ActiveRecord::RecordNotFound)
       end
 
       it "assigns the requested list as @list" do
         list = FactoryGirl.create(:list, user: @current_user)
-        get :edit, { id: list.to_param }
+        get :edit, id: list.to_param
         expect(assigns(:list)).to eq(list)
       end
     end
@@ -109,31 +109,31 @@ RSpec.describe ListsController, type: :controller do
       context "with valid params" do
         it "creates a new List" do
           expect do
-            post :create, { list: valid_attributes }
+            post :create, list: valid_attributes
           end.to change(List, :count).by(1)
         end
 
         it "assigns a newly created user list as @list" do
-          post :create, { list: valid_attributes }
+          post :create, list: valid_attributes
           expect(assigns(:list)).to be_a(List)
           expect(assigns(:list)).to be_persisted
           expect(assigns(:list).user).to eq(@current_user)
         end
 
         it "redirects to the created list" do
-          post :create, { list: valid_attributes }
+          post :create, list: valid_attributes
           expect(response).to redirect_to(list_url(List.last))
         end
       end
 
       context "with invalid params" do
         it "assigns a newly created but unsaved list as @list" do
-          post :create, { list: { list_id: nil } }
+          post :create, list: { list_id: nil }
           expect(assigns(:list)).to be_a_new(List)
         end
 
         it "re-renders the 'new' template" do
-          post :create, { list: { list_id: nil } }
+          post :create, list: { list_id: nil }
           expect(response).to render_template("new")
         end
       end
@@ -145,25 +145,25 @@ RSpec.describe ListsController, type: :controller do
 
         it "cannot find non user lists" do
           list = FactoryGirl.create(:list)
-          expect { put :update, { id: list.to_param } }.
+          expect { put :update, id: list.to_param }.
             to raise_error(ActiveRecord::RecordNotFound)
         end
 
         it "updates the requested list" do
           list = FactoryGirl.create(:list, user: @current_user)
-          put :update, { id: list.to_param, list: new_attributes }
+          put :update, id: list.to_param, list: new_attributes
           expect(list.reload.name).to eq("New Name")
         end
 
         it "assigns the requested list as @list" do
           list = FactoryGirl.create(:list, user: @current_user)
-          put :update, { id: list.to_param, list: new_attributes }
+          put :update, id: list.to_param, list: new_attributes
           expect(assigns(:list)).to eq(list)
         end
 
         it "redirects to the list" do
           list = FactoryGirl.create(:list, user: @current_user)
-          put :update, { id: list.to_param, list: valid_attributes }
+          put :update, id: list.to_param, list: valid_attributes
           expect(response).to redirect_to(list_url(list))
         end
       end
@@ -171,13 +171,13 @@ RSpec.describe ListsController, type: :controller do
       context "with invalid params" do
         it "assigns the list as @list" do
           list = FactoryGirl.create(:list, user: @current_user)
-          put :update, { id: list.to_param, list: { name: nil } }
+          put :update, id: list.to_param, list: { name: nil }
           expect(assigns(:list)).to eq(list)
         end
 
         it "re-renders the 'edit' template" do
           list = FactoryGirl.create(:list, user: @current_user)
-          put :update, { id: list.to_param, list: { name: nil } }
+          put :update, id: list.to_param, list: { name: nil }
           expect(response).to render_template("edit")
         end
       end
@@ -186,20 +186,20 @@ RSpec.describe ListsController, type: :controller do
     describe "DELETE #destroy" do
       it "cannot find non user lists" do
         list = FactoryGirl.create(:list)
-        expect { delete :destroy, { id: list.to_param } }.
+        expect { delete :destroy, id: list.to_param }.
           to raise_error(ActiveRecord::RecordNotFound)
       end
 
       it "destroys the requested list" do
         list = FactoryGirl.create(:list, user: @current_user)
         expect do
-          delete :destroy, { id: list.to_param }
+          delete :destroy, id: list.to_param
         end.to change(List, :count).by(-1)
       end
 
       it "redirects to the lists list" do
         list = FactoryGirl.create(:list, user: @current_user)
-        delete :destroy, { id: list.to_param }
+        delete :destroy, id: list.to_param
         expect(response).to redirect_to(lists_url)
       end
     end
