@@ -2,6 +2,7 @@ class ListsController < ApplicationController
   class ShoppingListItem < Struct.new(:food, :amount)
   end
 
+  before_action :authenticate_user!
   before_action :set_list, only: [:show, :edit, :update, :destroy]
 
   # GET /lists
