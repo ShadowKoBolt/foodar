@@ -32,6 +32,22 @@ RSpec.describe FoodsController, type: :controller do
           to redirect_to(new_user_session_url)
       end
     end
+
+    describe 'PATCH #update' do
+      it "should redirect to login" do
+        food = FactoryGirl.create(:food)
+        expect(post(:update, id: food.to_param, food: { name: "New Name" })).
+          to redirect_to(new_user_session_url)
+      end
+    end
+
+    describe "DELETE #destroy" do
+      it "should redirect to login" do
+        food = FactoryGirl.create(:food)
+        expect(delete(:destroy, id: food.to_param)).
+          to redirect_to(new_user_session_url)
+      end
+    end
   end
 
   context "logged in" do
@@ -124,7 +140,7 @@ RSpec.describe FoodsController, type: :controller do
 
         it "redirects to the food" do
           food = FactoryGirl.create(:food, user: @current_user)
-          put :update, { id: food.to_param, food: valid_attributes }
+          put :update, id: food.to_param, food: valid_attributes
           expect(response).to redirect_to(foods_url)
         end
       end
@@ -132,13 +148,13 @@ RSpec.describe FoodsController, type: :controller do
       context "with invalid params" do
         it "assigns the food as @food" do
           food = FactoryGirl.create(:food, user: @current_user)
-          put :update, { id: food.to_param, food: { name: '' } }
+          put :update, id: food.to_param, food: { name: "" }
           expect(assigns(:food)).to eq(food)
         end
 
         it 're-renders the "edit" template' do
           food = FactoryGirl.create(:food, user: @current_user)
-          put :update, { id: food.to_param, food: { name: '' } }
+          put :update, id: food.to_param, food: { name: "" }
           expect(response).to render_template("edit")
         end
       end
@@ -148,20 +164,20 @@ RSpec.describe FoodsController, type: :controller do
       it "cannot find non-user foods" do
         food = FactoryGirl.create(:food)
         expect do
-          delete :destroy, { id: food.to_param }
+          delete :destroy, id: food.to_param
         end.to raise_error(ActiveRecord::RecordNotFound)
       end
 
       it "destroys the requested food" do
         food = FactoryGirl.create(:food, user: @current_user)
         expect do
-          delete :destroy, { id: food.to_param }
+          delete :destroy, id: food.to_param
         end.to change(Food, :count).by(-1)
       end
 
       it "redirects to the foods list" do
         food = FactoryGirl.create(:food, user: @current_user)
-        delete :destroy, { id: food.to_param }
+        delete :destroy, id: food.to_param
         expect(response).to redirect_to(foods_url)
       end
     end
