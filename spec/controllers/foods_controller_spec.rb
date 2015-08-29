@@ -6,19 +6,19 @@ RSpec.describe FoodsController, type: :controller do
   end
 
   context "not logged in" do
-    describe 'GET #index' do
+    describe "GET #index" do
       it "should redirect to login" do
         expect(get(:index)).to redirect_to(new_user_session_url)
       end
     end
 
-    describe 'GET #new' do
+    describe "GET #new" do
       it "should redirect to login" do
         expect(get(:new)).to redirect_to(new_user_session_url)
       end
     end
 
-    describe 'GET #edit' do
+    describe "GET #edit" do
       it "should redirect to login" do
         food = FactoryGirl.create(:food)
         expect(get(:edit, id: food.to_param)).
@@ -26,14 +26,14 @@ RSpec.describe FoodsController, type: :controller do
       end
     end
 
-    describe 'POST #create' do
+    describe "POST #create" do
       it "should redirect to login" do
         expect(post(:create, valid_attributes)).
           to redirect_to(new_user_session_url)
       end
     end
 
-    describe 'PATCH #update' do
+    describe "PATCH #update" do
       it "should redirect to login" do
         food = FactoryGirl.create(:food)
         expect(post(:update, id: food.to_param, food: { name: "New Name" })).
@@ -62,14 +62,14 @@ RSpec.describe FoodsController, type: :controller do
       end
     end
 
-    describe 'GET #new' do
+    describe "GET #new" do
       it "assigns a new food as @food" do
         get :new
         expect(assigns(:food)).to be_a_new(Food)
       end
     end
 
-    describe 'GET #edit' do
+    describe "GET #edit" do
       it "raises an error if a non-user food is requested" do
         food = FactoryGirl.create(:food)
         expect { get(:edit, id: food.to_param) }.
@@ -83,7 +83,7 @@ RSpec.describe FoodsController, type: :controller do
       end
     end
 
-    describe 'POST #create' do
+    describe "POST #create" do
       context "with valid params" do
         it "creates a new Food" do
           expect { post :create, food: valid_attributes }.
@@ -122,7 +122,7 @@ RSpec.describe FoodsController, type: :controller do
       end
     end
 
-    describe 'PUT #update' do
+    describe "PUT #update" do
       context "with valid params" do
         let(:new_attributes) { { name: "New Name" } }
 
@@ -166,7 +166,7 @@ RSpec.describe FoodsController, type: :controller do
       end
     end
 
-    describe 'DELETE #destroy' do
+    describe "DELETE #destroy" do
       it "cannot find non-user foods" do
         food = FactoryGirl.create(:food)
         expect do
