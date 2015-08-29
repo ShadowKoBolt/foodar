@@ -97,9 +97,15 @@ RSpec.describe FoodsController, type: :controller do
           expect(assigns(:food).user).to eq(@current_user)
         end
 
-        it "redirects to the food list" do
+        it "redirects to the food list if no recipe is present" do
           post :create, food: valid_attributes
           expect(response).to redirect_to(foods_url)
+        end
+
+        it "redirects to the recipe if recipe is present" do
+          recipe = FactoryGirl.create(:recipe)
+          post :create, food: valid_attributes.merge(recipe_id: recipe.to_param)
+          expect(response).to(redirect_to(new_recipe_ingredient_url(recipe, ingredient: { food_id: Food.last.to_param } )))
         end
       end
 
