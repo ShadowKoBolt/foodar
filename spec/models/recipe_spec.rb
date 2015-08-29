@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Recipe, type: :model do
   it { should validate_presence_of(:user) }
@@ -14,8 +14,8 @@ RSpec.describe Recipe, type: :model do
   # default_scope { order(:name) }
   describe ".all" do
     it "should be ordered by name" do
-      z = FactoryGirl.create(:recipe, name: 'Z')
-      a = FactoryGirl.create(:recipe, name: 'A')
+      z = FactoryGirl.create(:recipe, name: "Z")
+      a = FactoryGirl.create(:recipe, name: "A")
       expect(Recipe.all).to contain_exactly(a, z)
     end
   end

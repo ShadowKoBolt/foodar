@@ -1,11 +1,11 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "recipes/edit", type: :view do
   before(:each) do
     @recipe = assign(:recipe, Recipe.create!(
-      :name => "MyString",
-      :serves => 1,
-      :user_id => 1
+                                name: "MyString",
+                                serves: 1,
+                                user_id: 1
     ))
   end
 
@@ -13,7 +13,6 @@ RSpec.describe "recipes/edit", type: :view do
     render
 
     assert_select "form[action=?][method=?]", recipe_path(@recipe), "post" do
-
       assert_select "input#recipe_name[name=?]", "recipe[name]"
 
       assert_select "input#recipe_serves[name=?]", "recipe[serves]"

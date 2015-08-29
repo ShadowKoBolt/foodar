@@ -25,12 +25,12 @@ RSpec.describe Meal, type: :model do
     end
 
     it "should contain only strings" do
-      expect(Meal::TIMES.map{ |item| item.class }.uniq).to eq([String])
+      expect(Meal::TIMES.map(&:class).uniq).to eq([String])
     end
   end
 
   describe "#time_position" do
-    {"breakfast" => 0, "lunch" => 1, "dinner" => 2, "snack" => 3}.each do |k, v|
+    { "breakfast" => 0, "lunch" => 1, "dinner" => 2, "snack" => 3 }.each do |k, v|
       it "should place #{k} in position #{v}" do
         expect(FactoryGirl.build(:meal, time: k).time_position).to eq(v)
       end

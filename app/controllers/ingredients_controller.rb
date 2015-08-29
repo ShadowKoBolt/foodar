@@ -30,7 +30,7 @@ class IngredientsController < ApplicationController
 
     respond_to do |format|
       if @ingredient.save
-        format.html { redirect_to @recipe, notice: 'Ingredient was successfully created.' }
+        format.html { redirect_to @recipe, notice: "Ingredient was successfully created." }
         format.json { render :show, status: :created, location: @ingredient }
       else
         format.html { render :new }
@@ -44,7 +44,7 @@ class IngredientsController < ApplicationController
   def update
     respond_to do |format|
       if @ingredient.update(ingredient_params)
-        format.html { redirect_to @recipe, notice: 'Ingredient was successfully updated.' }
+        format.html { redirect_to @recipe, notice: "Ingredient was successfully updated." }
         format.json { render :show, status: :ok, location: @ingredient }
       else
         format.html { render :edit }
@@ -58,26 +58,27 @@ class IngredientsController < ApplicationController
   def destroy
     @ingredient.destroy
     respond_to do |format|
-      format.html { redirect_to recipe_url(@recipe), notice: 'Ingredient was successfully destroyed.' }
+      format.html { redirect_to recipe_url(@recipe), notice: "Ingredient was successfully destroyed." }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_recipe
-      @recipe = current_user.recipes.find(params[:recipe_id])
-    end
 
-    def set_ingredient
-      @ingredient = @recipe.ingredients.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_recipe
+    @recipe = current_user.recipes.find(params[:recipe_id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def ingredient_params
-      params
-        .require(:ingredient)
-        .permit(:food_id, :amount)
-        .merge(recipe_id: @recipe.id)
-    end
+  def set_ingredient
+    @ingredient = @recipe.ingredients.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def ingredient_params
+    params.
+      require(:ingredient).
+      permit(:food_id, :amount).
+      merge(recipe_id: @recipe.id)
+  end
 end

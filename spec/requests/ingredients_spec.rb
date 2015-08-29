@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "Ingredients", type: :request do
   describe "GET /ingredients" do

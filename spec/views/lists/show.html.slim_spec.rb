@@ -1,10 +1,10 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "lists/show", type: :view do
   before(:each) do
     @list = assign(:list, List.create!(
-      :user_id => 1,
-      :name => "Name"
+                            user_id: 1,
+                            name: "Name"
     ))
   end
 

@@ -1,12 +1,12 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "meals/new", type: :view do
   before(:each) do
     assign(:meal, Meal.new(
-      :recipe_id => 1,
-      :time => "MyString",
-      :serves => 1.5,
-      :user_id => 1
+                    recipe_id: 1,
+                    time: "MyString",
+                    serves: 1.5,
+                    user_id: 1
     ))
   end
 
@@ -14,7 +14,6 @@ RSpec.describe "meals/new", type: :view do
     render
 
     assert_select "form[action=?][method=?]", meals_path, "post" do
-
       assert_select "input#meal_recipe_id[name=?]", "meal[recipe_id]"
 
       assert_select "input#meal_time[name=?]", "meal[time]"

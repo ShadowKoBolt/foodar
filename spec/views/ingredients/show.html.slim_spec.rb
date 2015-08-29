@@ -1,11 +1,11 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "ingredients/show", type: :view do
   before(:each) do
     @ingredient = assign(:ingredient, Ingredient.create!(
-      :recipe_id => 1,
-      :food_id => 2,
-      :amount => 1.5
+                                        recipe_id: 1,
+                                        food_id: 2,
+                                        amount: 1.5
     ))
   end
 
