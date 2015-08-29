@@ -30,7 +30,13 @@ RSpec.describe Meal, type: :model do
   end
 
   describe "#time_position" do
-    { "breakfast" => 0, "lunch" => 1, "dinner" => 2, "snack" => 3 }.each do |k, v|
+    meals = {
+      "breakfast" => 0,
+      "lunch" => 1,
+      "dinner" => 2,
+      "snack" => 3
+    }
+    meals.each do |k, v|
       it "should place #{k} in position #{v}" do
         expect(FactoryGirl.build(:meal, time: k).time_position).to eq(v)
       end
