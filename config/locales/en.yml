@@ -36,6 +36,8 @@ en:
 
   notice:
     created: "%{model} was successfully created"
+    updated: "%{model} was successfully updated"
+    destroyed: "%{model} was successfully destroyed"
     duplicated: "%{model} successfully duplicated"
 
   confirm: "Are you sure?"

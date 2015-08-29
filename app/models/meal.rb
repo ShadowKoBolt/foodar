@@ -1,6 +1,5 @@
 class Meal < ActiveRecord::Base
-  validates :recipe, :date, :user, presence: true
-  validates :time, presence: true
+  validates :recipe, :date, :user, :time, presence: true
   validates :serves, presence: true, numericality: true
 
   belongs_to :recipe
@@ -13,5 +12,4 @@ class Meal < ActiveRecord::Base
   def time_position
     TIMES.rindex(time)
   end
-
 end
