@@ -99,7 +99,7 @@ RSpec.describe MealsController, type: :controller do
           expect(assigns(:meal).user).to eq(@current_user)
         end
 
-        it "redirects to the created meal" do
+        it "redirects to the meals index" do
           post :create, { meal: valid_attributes }
           expect(response).to redirect_to(meals_url)
         end
@@ -140,7 +140,7 @@ RSpec.describe MealsController, type: :controller do
           expect(assigns(:meal)).to eq(meal)
         end
 
-        it "redirects to the meal" do
+        it "redirects to the meals index" do
           meal = FactoryGirl.create(:meal, user: @current_user)
           put :update, { id: meal.to_param, meal: valid_attributes }
           expect(response).to redirect_to(meals_url)
