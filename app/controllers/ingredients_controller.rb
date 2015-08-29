@@ -14,7 +14,8 @@ class IngredientsController < ApplicationController
   def create
     @ingredient = Ingredient.new(ingredient_params)
     if @ingredient.save
-      redirect_to @recipe, notice: "Ingredient was successfully created."
+      redirect_to @recipe,
+        notice: t("notice.created", model: Ingredient.model_name.human)
     else
       render :new
     end
@@ -22,7 +23,8 @@ class IngredientsController < ApplicationController
 
   def update
     if @ingredient.update(ingredient_params)
-      redirect_to @recipe, notice: "Ingredient was successfully updated."
+      redirect_to @recipe,
+        notice: t("notice.updated", model: Ingredient.model_name.human)
     else
       render :edit
     end
@@ -30,7 +32,8 @@ class IngredientsController < ApplicationController
 
   def destroy
     @ingredient.destroy
-    redirect_to recipe_url(@recipe), notice: "Ingredient was successfully destroyed."
+    redirect_to recipe_url(@recipe),
+      notice: t("notice.destroyed", model: Ingredient.model_name.human)
   end
 
   private

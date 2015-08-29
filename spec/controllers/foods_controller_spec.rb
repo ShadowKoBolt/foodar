@@ -53,7 +53,7 @@ RSpec.describe FoodsController, type: :controller do
   context "logged in" do
     login_user
 
-    describe 'GET #index' do
+    describe "GET #index" do
       it "assigns all users foods as @foods" do
         user_food = FactoryGirl.create(:food, user: @current_user)
         FactoryGirl.create(:food)
