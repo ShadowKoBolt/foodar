@@ -25,36 +25,24 @@ class MealsController < ApplicationController
 
   def create
     @meal = Meal.new(meal_params)
-
-    respond_to do |format|
-      if @meal.save
-        format.html { redirect_to meals_url, notice: "Meal was successfully created." }
-        format.json { render :show, status: :created, location: @meal }
-      else
-        format.html { render :new }
-        format.json { render json: @meal.errors, status: :unprocessable_entity }
-      end
+    if @meal.save
+      redirect_to meals_url, notice: "Meal was successfully created."
+    else
+      render :new
     end
   end
 
   def update
-    respond_to do |format|
-      if @meal.update(meal_params)
-        format.html { redirect_to meals_url, notice: "Meal was successfully updated." }
-        format.json { render :show, status: :ok, location: @meal }
-      else
-        format.html { render :edit }
-        format.json { render json: @meal.errors, status: :unprocessable_entity }
-      end
+    if @meal.update(meal_params)
+      redirect_to meals_url, notice: "Meal was successfully updated."
+    else
+      render :edit
     end
   end
 
   def destroy
     @meal.destroy
-    respond_to do |format|
-      format.html { redirect_to meals_url, notice: "Meal was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    redirect_to meals_url, notice: "Meal was successfully destroyed."
   end
 
   def duplicate
