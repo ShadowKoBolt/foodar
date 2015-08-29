@@ -28,7 +28,7 @@ var DuplicateModalForm = React.createClass({
                   <button type="button" className="btn btn-default" data-dismiss="modal">
                     Close
                   </button>
-                  <input type="submit" className="btn btn-primary" value="Save" />
+                  <input type="submit" className="btn btn-primary" value="Duplicate" />
                 </div>
               </form>
             </div>
