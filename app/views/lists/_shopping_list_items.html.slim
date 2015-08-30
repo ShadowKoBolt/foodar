@@ -2,8 +2,8 @@
   .col-xs-12 &nbsp;
 .well
   - @shopping_list_items.each do |aisle, items|
-    h4 = aisle.humanize
-    ul.list-unstyled
+    h4.handwritten = aisle.humanize
+    ul.list-unstyled.handwritten
       - items.each do |item|
         li
           = "#{trim item.amount} #{item.food.unit_name} #{item.food.name}"

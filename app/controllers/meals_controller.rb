@@ -14,6 +14,7 @@ class MealsController < ApplicationController
         className: meal.time
       }
     end.to_json
+    @meals = @meals.page(params[:page])
   end
 
   def new

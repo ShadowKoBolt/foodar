@@ -13,8 +13,13 @@
  *= require_self
  */
 
+@import url(https://fonts.googleapis.com/css?family=Indie+Flower);
+@import url(https://fonts.googleapis.com/css?family=Gruppo);
 @import "bootstrap-sprockets";
 @import "bootswatch/paper/variables";
+
+$headings-font-family: 'Gruppo', cursive;
+
 @import "bootstrap";
 @import "bootswatch/paper/bootswatch";
 @import "devise_bootstrap_views";
@@ -31,8 +36,10 @@ label small {
   margin-left: $grid-gutter-width/2;
   opacity: 0.8;
 }
-h1 small {
-  margin-left: $grid-gutter-width;
+h1, h2, h3, h4, h5 {
+  small {
+    margin-left: $grid-gutter-width;
+  }
 }
 .fc-event {
   &.breakfast { background-color: darken($brand-primary, 0%); }
@@ -44,4 +51,14 @@ h1 small {
   h2 {
     font-size: 26px;
   }
+}
+.handwritten {
+  font-family: 'Indie Flower', cursive;
+}
+.navbar-brand {
+  font-family: $headings-font-family;
+}
+.btn {
+  font-family: $headings-font-family;
+  font-weight: bold;
 }

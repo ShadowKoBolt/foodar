@@ -31,9 +31,15 @@ table.table.table-stripped
             = link_to 'Edit', edit_meal_path(meal), class: 'btn btn-warning'
             = link_to 'Destroy', meal, data: {:confirm => t('confirm')}, :method => :delete, class: 'btn btn-danger'
 
-.btn-group
-  = link_to t('link.new', model: Meal.model_name.human), new_meal_path, class: 'btn btn-success'
-  = link_to t('link.duplicate', model: Meal.model_name.human.pluralize), duplicate_meals_path, class: 'btn btn-warning'
+.row
+  .col-xs-12
+    = paginate @meals
+
+.row
+  .col-xs-12
+    .btn-group
+      = link_to t('link.new', model: Meal.model_name.human), new_meal_path, class: 'btn btn-success'
+      = link_to t('link.duplicate', model: Meal.model_name.human.pluralize), duplicate_meals_path, class: 'btn btn-warning'
 
 .row
   .col-xs-12 &nbsp;

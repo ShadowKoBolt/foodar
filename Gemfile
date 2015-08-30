@@ -58,6 +58,8 @@ gem 'momentjs-rails'
 gem 'bootstrap3-datetimepicker-rails'
 gem 'select2-rails'
 gem 'jquery-ui-rails'
+gem 'kaminari'
+gem 'kaminari-bootstrap'
 
 group :production do
   gem 'rails_12factor'
