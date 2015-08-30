@@ -6,6 +6,10 @@
     ul.list-unstyled.handwritten
       - items.each do |item|
         li
-          = "#{trim item.amount} #{item.food.unit_name} #{item.food.name}"
+          - if item.edit_url
+            = link_to item.edit_url do
+              = [trim(item.amount), item.unit_name, item.name].compact.join(" ")
+          - else
+            = [trim(item.amount), item.unit_name, item.name].compact.join(" ")
 
 

@@ -6,4 +6,6 @@ h1
 
 .btn-group
   = link_to 'Edit', edit_list_path(@list), class: 'btn btn-warning'
-  = link_to 'Back', lists_path, class: 'btn btn-danger'
+  = link_to "Add #{ListItem.model_name.human}", new_list_list_item_path(@list), class: 'btn btn-success'
+
+= link_to 'Back', lists_path, class: 'btn btn-danger pull-right'

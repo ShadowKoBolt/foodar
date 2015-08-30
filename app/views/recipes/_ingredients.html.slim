@@ -1,26 +1,26 @@
 .row.well
   .col-xs-12
-    h3 = Ingredient.model_name.human.pluralize
+    h3 = ListItem.model_name.human.pluralize
 
     table.table.table-striped
       thead
         tr
-          th = Ingredient.human_attribute_name(:name)
-          th = Ingredient.human_attribute_name(:amount)
-          th = Ingredient.human_attribute_name(:amount_per_serving)
-          th = Ingredient.human_attribute_name(:unit_name)
+          th = ListItem.human_attribute_name(:name)
+          th = ListItem.human_attribute_name(:amount)
+          th = ListItem.human_attribute_name(:amount_per_serving)
+          th = ListItem.human_attribute_name(:unit_name)
           th
 
       tbody
-        - @recipe.ingredients.each do |ingredient|
+        - @list.list_items.each do |list_item|
           tr
-            td = ingredient.food.name
-            td = trim ingredient.amount
-            td = trim ingredient.amount_per_serving
-            td = ingredient.food.unit_name
+            td = list_item.food.name
+            td = trim list_item.amount
+            td = trim list_item.amount_per_serving
+            td = list_item.food.unit_name
             td align='right'
               .btn-group
-                = link_to t('link.edit'), edit_recipe_ingredient_path(@recipe, ingredient), class: 'btn btn-warning'
-                = link_to t('link.destroy'), [@recipe, ingredient], data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'btn btn-danger'
+                = link_to t('link.edit'), edit_list_list_item_path(@list, list_item), class: 'btn btn-warning'
+                = link_to t('link.destroy'), [@list, list_item], data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'btn btn-danger'
 
-    = link_to "Add #{Ingredient.model_name.human}", new_recipe_ingredient_path(@recipe), class: 'btn btn-success'
+    = link_to "Add #{ListItem.model_name.human}", new_list_list_item_path(@list), class: 'btn btn-success'

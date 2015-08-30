@@ -4,6 +4,7 @@ class List < ActiveRecord::Base
   validate :start_date_before_end_date
 
   belongs_to :user
+  has_many :list_items, dependent: :destroy
 
   private
 

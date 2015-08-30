@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   resources :recipes do
     resources :ingredients, only: [:create, :new, :edit, :update, :destroy]
   end
-  resources :lists
+  resources :lists do
+    resources :list_items, except: [:show]
+  end
   resources :foods, except: [:show]
   resources :meals, except: [:show] do
     collection do
